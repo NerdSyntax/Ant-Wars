@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bq2vbaop6qc7c"]
+
+[ext_resource type="Script" uid="uid://d1gkbn1uyqb5t" path="res://mundo.gd" id="1_aou4a"]
+[ext_resource type="PackedScene" uid="uid://cfequad1n5mg0" path="res://hormiga.tscn" id="1_lgngo"]
+[ext_resource type="PackedScene" uid="uid://07am7hsyyj2" path="res://enemigo.tscn" id="2_fw4w5"]
+[ext_resource type="PackedScene" uid="uid://dfax5ofrrrcru" path="res://suelo.tscn" id="3_fw4w5"]
+[ext_resource type="PackedScene" uid="uid://clx0w0uby7khp" path="res://base_enemiga.tscn" id="5_5ckkb"]
+[ext_resource type="PackedScene" uid="uid://buhjqn0b8ubpx" path="res://base_jugador.tscn" id="6_2hh7m"]
+
+[node name="Mundo" type="Node2D" unique_id=1009315774]
+script = ExtResource("1_aou4a")
+escena_hormiga = ExtResource("1_lgngo")
+
+[node name="Hormiga" parent="." unique_id=1335070993 instance=ExtResource("1_lgngo")]
+position = Vector2(358, 394)
+
+[node name="enemigo" parent="." unique_id=509634844 instance=ExtResource("2_fw4w5")]
+position = Vector2(755, 331)
+
+[node name="suelo" parent="." unique_id=1907762367 instance=ExtResource("3_fw4w5")]
+position = Vector2(-68, 452)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=779892666]
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=1129040616]
+offset_right = 191.0
+offset_bottom = 119.0
+text = "Invocar"
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=460624773]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="base_enemiga" parent="." unique_id=828042149 instance=ExtResource("5_5ckkb")]
+position = Vector2(1003, 382)
+
+[node name="base_jugador" parent="." unique_id=1267037694 instance=ExtResource("6_2hh7m")]
+position = Vector2(80, 377)
+
+[node name="TimerDinero" type="Timer" parent="." unique_id=930337426]
+autostart = true
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://clx0w0uby7khp"]
+
+[ext_resource type="Script" uid="uid://b0mmrqx3qvnx7" path="res://base_enemiga.gd" id="1_2clr1"]
+[ext_resource type="Texture2D" uid="uid://bwswrsri2jybd" path="res://icon.svg" id="1_klgyv"]
+[ext_resource type="PackedScene" uid="uid://07am7hsyyj2" path="res://enemigo.tscn" id="2_w03gt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2clr1"]
+size = Vector2(144.5, 111.5)
+
+[node name="base_enemiga" type="Node2D" unique_id=828042149]
+
+[node name="base_enemiga" type="StaticBody2D" parent="." unique_id=321635109]
+script = ExtResource("1_2clr1")
+escena_enemigo = ExtResource("2_w03gt")
+
+[node name="Timer" type="Timer" parent="base_enemiga" unique_id=411880731]
+wait_time = 2.012
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="base_enemiga" unique_id=806494946]
+self_modulate = Color(0.3060901, 0.99999994, 0.8980068, 1)
+texture = ExtResource("1_klgyv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="base_enemiga" unique_id=530658451]
+position = Vector2(-10, -3)
+shape = SubResource("RectangleShape2D_2clr1")
+
+[node name="ProgressBar" type="ProgressBar" parent="base_enemiga" unique_id=1056482697]
+offset_left = -90.0
+offset_top = -131.0
+offset_right = 73.0
+offset_bottom = -104.0
+value = 100.0
+show_percentage = false
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=1753762342]
+position = Vector2(-149, 11)
+
+[connection signal="timeout" from="base_enemiga/Timer" to="base_enemiga" method="_on_timer_timeout"]

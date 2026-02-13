@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://07am7hsyyj2"]
+
+[ext_resource type="Script" uid="uid://dtj0uj8qq22f3" path="res://enemigo.gd" id="1_a5tj2"]
+[ext_resource type="Texture2D" uid="uid://cf01nepslkj8" path="res://1000011289-removebg-preview.png" id="1_becj5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a5tj2"]
+radius = 35.0
+height = 122.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_moxti"]
+radius = 21.0
+height = 96.0
+
+[node name="enemigo" type="Node2D" unique_id=509634844]
+metadata/_edit_horizontal_guides_ = [-118.0]
+
+[node name="enemigo" type="CharacterBody2D" parent="." unique_id=238669957]
+position = Vector2(-7, 16)
+collision_layer = 2
+script = ExtResource("1_a5tj2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemigo" unique_id=1888765372]
+position = Vector2(30, 42)
+shape = SubResource("CapsuleShape2D_a5tj2")
+debug_color = Color(0.09283363, 0.52409077, 0.997466, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="enemigo" unique_id=904076209]
+position = Vector2(26.53125, 31.875)
+scale = Vector2(0.41787505, 0.4285)
+texture = ExtResource("1_becj5")
+
+[node name="ProgressBar" type="ProgressBar" parent="enemigo" unique_id=54464377]
+offset_left = -49.0
+offset_top = -71.0
+offset_right = 104.0
+offset_bottom = -44.0
+value = 100.0
+show_percentage = false
+
+[node name="Area2D" type="Area2D" parent="enemigo" unique_id=1529387395]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemigo/Area2D" unique_id=1267291976]
+position = Vector2(-5, 36)
+shape = SubResource("CapsuleShape2D_moxti")
+
+[connection signal="body_entered" from="enemigo/Area2D" to="enemigo" method="_on_area_2d_body_entered"]

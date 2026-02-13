@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://cfequad1n5mg0"]
+
+[ext_resource type="Script" uid="uid://cprekexj1p4qc" path="res://hormiga.gd" id="1_bo5m2"]
+[ext_resource type="Texture2D" uid="uid://cryalq1tvb75f" path="res://1000013161-removebg-preview.png" id="3_3imk1"]
+[ext_resource type="Texture2D" uid="uid://onkxjwoyckvr" path="res://1000013356-removebg-preview.png" id="3_ff2jw"]
+[ext_resource type="Texture2D" uid="uid://bgrwkwhodxp83" path="res://1000013672-removebg-preview.png" id="4_ff2jw"]
+[ext_resource type="Texture2D" uid="uid://cx5rurvmj2kgr" path="res://1000013587-removebg-preview.png" id="5_81y6p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bo5m2"]
+size = Vector2(114.25, 98)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ff2jw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ff2jw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3imk1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ff2jw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3imk1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ff2jw")
+}],
+"loop": true,
+"name": &"caminar",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ff2jw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_81y6p")
+}],
+"loop": false,
+"name": &"golpe ",
+"speed": 2.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_81y6p"]
+radius = 21.0
+height = 96.0
+
+[node name="Hormiga" type="Node2D" unique_id=1335070993]
+metadata/_edit_horizontal_guides_ = [-175.0]
+
+[node name="hormiga" type="CharacterBody2D" parent="." unique_id=1064616033]
+collision_mask = 2
+script = ExtResource("1_bo5m2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hormiga" unique_id=1200184033]
+position = Vector2(2, -5)
+shape = SubResource("RectangleShape2D_bo5m2")
+
+[node name="ProgressBar" type="ProgressBar" parent="hormiga" unique_id=307862705]
+offset_left = -82.0
+offset_top = -91.0
+offset_right = 105.0
+offset_bottom = -64.0
+value = 100.0
+show_percentage = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="hormiga" unique_id=410768421]
+position = Vector2(20, -13)
+scale = Vector2(0.55350006, 0.475)
+sprite_frames = SubResource("SpriteFrames_ff2jw")
+animation = &"golpe "
+frame = 1
+frame_progress = 1.0
+
+[node name="Area2D" type="Area2D" parent="hormiga" unique_id=334146248]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hormiga/Area2D" unique_id=1037091958]
+position = Vector2(62, -7)
+shape = SubResource("CapsuleShape2D_81y6p")
+
+[connection signal="body_entered" from="hormiga/Area2D" to="hormiga" method="_on_area_2d_body_entered"]

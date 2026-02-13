@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://buhjqn0b8ubpx"]
+
+[ext_resource type="Script" uid="uid://benvup5vt8h0p" path="res://base_jugador.gd" id="1_3tn3y"]
+[ext_resource type="Texture2D" uid="uid://bwswrsri2jybd" path="res://icon.svg" id="1_6yj6o"]
+[ext_resource type="Script" uid="uid://v66jx27bu4ry" path="res://base_jugador_nodo.gd" id="1_mc54e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3tn3y"]
+size = Vector2(167, 128)
+
+[node name="base_jugador_nodo" type="Node2D" unique_id=1267037694]
+script = ExtResource("1_mc54e")
+
+[node name="base_jugador" type="StaticBody2D" parent="." unique_id=551868021]
+script = ExtResource("1_3tn3y")
+
+[node name="Sprite2D" type="Sprite2D" parent="base_jugador" unique_id=34821143]
+texture = ExtResource("1_6yj6o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="base_jugador" unique_id=1736428460]
+position = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_3tn3y")
+
+[node name="ProgressBar" type="ProgressBar" parent="base_jugador" unique_id=437600397]
+offset_left = -90.0
+offset_top = -131.0
+offset_right = 73.0
+offset_bottom = -104.0
+value = 100.0
+show_percentage = false
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=2066158434]
+position = Vector2(138, 15)

@@ -1,13 +1,36 @@
 extends Node2D
 
-@export var hormiga_scene: PackedScene
+@export var escena_hormiga: PackedScene
+@export var max_hormigas: int = 5
+@export var cooldown: float = 2.0
 
-func spawn_hormiga():
-	if hormiga_scene == null:
+var hormigas_spawn: int = 0
+var timer_cooldown: float = 0.0
+
+func _process(delta):
+	if timer_cooldown > 0:
+		timer_cooldown -= delta
+
+func invocar_hormiga():
+	if not escena_hormiga:
 		print("No hay escena hormiga asignada")
 		return
-
-	var hormiga = hormiga_scene.instantiate()
-	get_parent().add_child(hormiga)
-
-	hormiga.global_position = global_position + Vector2(80, 0)
+	
+	if timer_cooldown > 0:
+		print("Cooldown activo")
+		return
+	
+	if hormigas_spawn >= max_hormigas:
+		print("Límite de hormigas alcanzado")
+		return
+	
+	if Global.comida_actual >= Global.costo_hormiga:
+		Global.comida_actual -= Global.costo_hormiga
+		var nueva = escena_hormiga.instantiate()
+		get_parent().add_child(nueva)
+		# Spawn cerca de la base
+		nueva.global_position = global_position + Vector2(80, 0)
+		hormigas_spawn += 1
+		timer_cooldown = cooldown
+	else:
+		print("No tienes suficiente comida")

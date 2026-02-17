@@ -3,12 +3,14 @@
 [ext_resource type="Script" uid="uid://benvup5vt8h0p" path="res://base_jugador.gd" id="1_3tn3y"]
 [ext_resource type="Texture2D" uid="uid://bwswrsri2jybd" path="res://icon.svg" id="1_6yj6o"]
 [ext_resource type="Script" uid="uid://v66jx27bu4ry" path="res://base_jugador_nodo.gd" id="1_mc54e"]
+[ext_resource type="PackedScene" uid="uid://cfequad1n5mg0" path="res://hormiga.tscn" id="2_fl570"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3tn3y"]
 size = Vector2(167, 128)
 
 [node name="base_jugador_nodo" type="Node2D" unique_id=1267037694]
 script = ExtResource("1_mc54e")
+escena_hormiga = ExtResource("2_fl570")
 
 [node name="base_jugador" type="StaticBody2D" parent="." unique_id=551868021]
 script = ExtResource("1_3tn3y")

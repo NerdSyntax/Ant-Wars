@@ -1,31 +1,25 @@
 extends Node2D
 
-@export var escena_hormiga: PackedScene
+# Referencias a nodos del HUD
+@onready var label_comida = get_node_or_null("CanvasLayer/HUD/Panel/Label")
+@onready var boton_hormiga = get_node_or_null("CanvasLayer/HUD/Panel/Button")
 
-@onready var label_comida = $CanvasLayer/Label
+# Referencias a bases
+@onready var base_jugador = get_node_or_null("BaseJugador")
+@onready var base_enemiga = get_node_or_null("BaseEnemiga")
+
+func _ready():
+	# Conecta el botón al método de invocar hormiga
+	if boton_hormiga and base_jugador:
+		boton_hormiga.pressed.connect(_on_boton_hormiga_pressed)
+	else:
+		print("Botón o BaseJugador no encontrado")
 
 func _process(delta):
-	# generar comida automáticamente
-	Global.comida += Global.comida_por_segundo * delta
-	
-	# mostrar comida en pantalla
-	label_comida.text = "Comida: " + str(int(Global.comida))
+	# Actualiza Label de comida
+	if label_comida:
+		label_comida.text = str(int(Global.comida_actual))
 
-func _crear_hormiga():
-	if escena_hormiga == null:
-		print("No hay escena hormiga asignada")
-		return
-
-	if Global.comida >= Global.costo_hormiga:
-		Global.comida -= Global.costo_hormiga
-		
-		var nueva = escena_hormiga.instantiate()
-		add_child(nueva)
-		nueva.global_position = Vector2(200, 400)
-
-
-
-
-
-func _on_button_pressed() -> void:
-	_crear_hormiga()
+func _on_boton_hormiga_pressed():
+	if base_jugador:
+		base_jugador.invocar_hormiga()

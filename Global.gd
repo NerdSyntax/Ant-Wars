@@ -1,10 +1,13 @@
 extends Node
 
-# dinero del jugador
-var comida = 50
+@export var comida_inicial: int = 100
+@export var comida_por_segundo: float = 1.0
+@export var costo_hormiga: int = 10
 
-# costo de crear hormiga
-var costo_hormiga = 10
+var comida_actual: float
 
-# comida que ganas por segundo
-var comida_por_segundo = 5
+func _ready():
+	comida_actual = comida_inicial
+
+func _process(delta):
+	comida_actual += comida_por_segundo * delta
